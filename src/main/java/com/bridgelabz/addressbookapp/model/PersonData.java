@@ -23,7 +23,7 @@ public @Data class PersonData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "person_id")
-	private long personId;
+	private int personId;
 	private String fName;
 	private String lName;
 	private String gender;
@@ -35,9 +35,12 @@ public @Data class PersonData {
 	private String country;
 	private String profilePic;
 
-	public PersonData(long personId, PersonDTO personDTO) {
+	public PersonData() {
 		super();
-		this.personId = personId;
+	}
+
+	public PersonData(PersonDTO personDTO) {
+		super();
 		this.updatePersonData(personDTO);
 	}
 

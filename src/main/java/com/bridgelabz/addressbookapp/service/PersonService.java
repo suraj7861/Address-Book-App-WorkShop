@@ -23,7 +23,7 @@ public class PersonService implements IPersonService {
 	@Override
 	public PersonData createPersonData(PersonDTO personDTO) {
 		PersonData contactData = null;
-		contactData = new PersonData(1, personDTO);
+		contactData = new PersonData(personDTO);
 		return personRepository.save(contactData);
 	}
 
@@ -32,7 +32,7 @@ public class PersonService implements IPersonService {
 	 * @return : PersonData
 	 */
 	@Override
-	public PersonData updatePersonDta(long id, PersonDTO personDTO) {
+	public PersonData updatePersonDta(int id, PersonDTO personDTO) {
 		PersonData personData = this.getPersonDataById(id);
 		personData.updatePersonData(personDTO);
 		return personRepository.save(personData);
@@ -51,12 +51,12 @@ public class PersonService implements IPersonService {
 	 * @return : PersonData
 	 */
 	@Override
-	public PersonData getPersonDataById(long id) {
+	public PersonData getPersonDataById(int id) {
 		return personRepository.findById(id).get();
 	}
 
 	@Override
-	public void deletePersonData(long id) {
+	public void deletePersonData(int id) {
 		PersonData personData = this.getPersonDataById(id);
 		personRepository.delete(personData);
 	}

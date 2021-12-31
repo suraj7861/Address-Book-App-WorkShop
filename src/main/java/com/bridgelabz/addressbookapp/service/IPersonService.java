@@ -13,11 +13,11 @@ public interface IPersonService {
 
 	PersonData createPersonData(PersonDTO personDTO);
 
-	PersonData updatePersonDta(long id, PersonDTO personDTO);
+	PersonData updatePersonDta(int id, PersonDTO personDTO);
 
 	List<PersonData> getPersonData();
 
-	PersonData getPersonDataById(long id);
+	PersonData getPersonDataById(int id);
 
-	void deletePersonData(long id);
+	void deletePersonData(int id);
 }
