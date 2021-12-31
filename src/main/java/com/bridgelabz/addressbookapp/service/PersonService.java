@@ -39,21 +39,20 @@ public class PersonService implements IPersonService {
 	}
 
 	/**
-	 * @param PersonDTO
 	 * @return : PersonData
 	 */
 	@Override
 	public List<PersonData> getPersonData() {
 		return personRepository.findAll();
-	}
+	}		
 
 	/**
-	 * @param PersonDTO
+	 * @param id
 	 * @return : PersonData
 	 */
 	@Override
 	public PersonData getPersonDataById(long id) {
-		return personRepository.findById(id);
+		return personRepository.findById(id).get();
 	}
 
 	@Override
