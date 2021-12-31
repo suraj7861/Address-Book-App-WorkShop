@@ -1,7 +1,6 @@
 package com.bridgelabz.addressbookapp.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +12,10 @@ import com.bridgelabz.addressbookapp.repository.IPersonRepository;
 @Service
 public class PersonService implements IPersonService {
 
+	/**
+	 * @Autowired
+	 * Perform CRUD operation with DB
+	 */
 	@Autowired
 	private IPersonRepository personRepository;
 
@@ -55,6 +58,10 @@ public class PersonService implements IPersonService {
 		return personRepository.findById(id).get();
 	}
 
+	/**
+	 * @param id
+	 * @return : void
+	 */
 	@Override
 	public void deletePersonData(int id) {
 		PersonData personData = this.getPersonDataById(id);

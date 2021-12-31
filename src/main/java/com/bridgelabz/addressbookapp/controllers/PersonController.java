@@ -26,6 +26,7 @@ public class PersonController {
 	private IPersonService personService;
 
 	/**
+	 * Add person details in DB
 	 * @param PersonDTO
 	 * @return : PersonData and HttpStatus
 	 */
@@ -38,6 +39,7 @@ public class PersonController {
 	}
 
 	/**
+	 * update person detail by id 
 	 * @param : ContactId and PersonDTO
 	 * @return : ResponseDTO
 	 */
@@ -51,6 +53,7 @@ public class PersonController {
 	}
 
 	/**
+	 * get all person list from DB
 	 * @return : ResponseDTO
 	 */
 	@RequestMapping("/getAll")
@@ -62,6 +65,7 @@ public class PersonController {
 	}
 
 	/**
+	 * get person details by id
 	 * @param id
 	 * @return : ResponseDTO
 	 */
@@ -74,7 +78,7 @@ public class PersonController {
 	}
 
 	/**
-	 * @DeleteMapping
+	 * delete person details by id
 	 * @param : contactId
 	 * @return : ResponseDTO
 	 */
