@@ -9,5 +9,5 @@ import lombok.Data;
 public @Data class AddressBookDTO {
 
 	public String addressBookName;
-	public List<PersonData> personList;
+	
 }

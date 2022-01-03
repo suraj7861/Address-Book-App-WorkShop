@@ -1,16 +1,12 @@
 package com.bridgelabz.addressbookapp.model;
 
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+
 
 import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
 
@@ -25,9 +21,9 @@ public @Data class AddressBookModel {
 	
 	private String addressBookName;
 	
-	@OneToMany(targetEntity = PersonData.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "add_id", referencedColumnName = "book_id")
-	private List<PersonData> personList;
+//	@OneToMany(targetEntity = PersonData.class, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "add_id", referencedColumnName = "book_id")
+//	private List<PersonData> personList;
 
 	public AddressBookModel() {
 		super();
@@ -40,6 +36,5 @@ public @Data class AddressBookModel {
 
 	public void updateAddressBookData(AddressBookDTO bookDTO) {
 		this.addressBookName = bookDTO.addressBookName;
-		this.personList = bookDTO.personList;
 	}
 }

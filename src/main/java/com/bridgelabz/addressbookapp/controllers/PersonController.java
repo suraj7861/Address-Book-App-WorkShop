@@ -7,11 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.addressbookapp.dto.PersonDTO;
@@ -32,9 +32,10 @@ public class PersonController {
 	 * @return : PersonData and HttpStatus
 	 */
 	@PostMapping("/Create")
-	public ResponseEntity<ResponseDTO> createAddressBookData(@RequestBody PersonDTO personDTO) {
+	public ResponseEntity<ResponseDTO> createAddressBookData(@RequestParam int adddressbookId,
+			@RequestBody PersonDTO personDTO) {
 		PersonData contactDetails = null;
-		contactDetails = personService.createPersonData(personDTO);
+		contactDetails = personService.createPersonData(adddressbookId, personDTO);
 		ResponseDTO respDTO = new ResponseDTO("created address book data successfully", contactDetails);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
@@ -45,11 +46,11 @@ public class PersonController {
 	 * @param : ContactId and PersonDTO
 	 * @return : ResponseDTO
 	 */
-	@PutMapping("/Update/{ContactId}")
-	public ResponseEntity<ResponseDTO> updateAddressBookData(@PathVariable("ContactId") int ContactId,
-			@RequestBody PersonDTO personDTO) {
+	@PutMapping("/Update")
+	public ResponseEntity<ResponseDTO> updateAddressBookData(@RequestParam int addressbookId,
+			@RequestParam int personId, @RequestBody PersonDTO personDTO) {
 		PersonData contactDetails = null;
-		contactDetails = personService.updatePersonDta(ContactId, personDTO);
+		contactDetails = personService.updatePersonDta(addressbookId, personId, personDTO);
 		ResponseDTO respDTO = new ResponseDTO("updated address book data successfully", contactDetails);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
@@ -73,11 +74,11 @@ public class PersonController {
 	 * @param id
 	 * @return : ResponseDTO
 	 */
-	@GetMapping("/get/{ContactId}")
-	public ResponseEntity<ResponseDTO> getAddressBookData(@PathVariable("ContactId") int contactId) {
+	@GetMapping("/get")
+	public ResponseEntity<ResponseDTO> getAddressBookData(@RequestParam int addressbookId, @RequestParam int personId) {
 		PersonData contactDetails = null;
-		contactDetails = personService.getPersonDataById(contactId);
-		ResponseDTO respDTO = new ResponseDTO("Get call success for id:" + contactId, contactDetails);
+		contactDetails = personService.getPersonDataById(addressbookId, personId);
+		ResponseDTO respDTO = new ResponseDTO("Get call success for id:" + personId, contactDetails);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
 
@@ -87,10 +88,11 @@ public class PersonController {
 	 * @param : contactId
 	 * @return : ResponseDTO
 	 */
-	@DeleteMapping("/Delete/{contactId}")
-	public ResponseEntity<ResponseDTO> deleteAddressBookData(@PathVariable("contactId") int contactId) {
-		personService.deletePersonData(contactId);
-		ResponseDTO respDTO = new ResponseDTO("Deleted AddressBook data Successfully", "deleted id is :" + contactId);
+	@DeleteMapping("/Delete")
+	public ResponseEntity<ResponseDTO> deleteAddressBookData(@RequestParam int addressbookId,
+			@RequestParam int personId) {
+		personService.deletePersonData(addressbookId, personId);
+		ResponseDTO respDTO = new ResponseDTO("Deleted AddressBook data Successfully", "deleted id is :" + personId);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
 }
