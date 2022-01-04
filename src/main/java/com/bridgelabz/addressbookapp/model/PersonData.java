@@ -23,11 +23,11 @@ import lombok.Data;
 public @Data class PersonData {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "person_id")
 	private int personId;
-	private String fName;
-	private String lName;
+	private String firstName;
+	private String lastName;
 	private String gender;
 	private long phoneNumber;
 	private String email;
@@ -51,8 +51,8 @@ public @Data class PersonData {
 	}
 
 	public void updatePersonData(PersonDTO personDTO) {
-		this.fName = personDTO.fName;
-		this.lName = personDTO.lName;
+		this.firstName = personDTO.firstName;
+		this.lastName = personDTO.lastName;
 		this.gender = personDTO.gender;
 		this.phoneNumber = personDTO.phoneNumber;
 		this.email = personDTO.email;

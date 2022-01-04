@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
+import com.bridgelabz.addressbookapp.exception.PersonException;
 import com.bridgelabz.addressbookapp.model.AddressBookModel;
 import com.bridgelabz.addressbookapp.repository.IAddressBookRepository;
 
@@ -58,7 +59,8 @@ public class AddressBookService implements IAddressBookService {
 	 */
 	@Override
 	public AddressBookModel getAddressBookDataById(int addressbookId) {
-		return addressBook.findById(addressbookId).get();
+		return addressBook.findById(addressbookId).orElseThrow(
+				() -> new PersonException("address book with id " + addressbookId + " does not exist !..."));
 	}
 
 	/**

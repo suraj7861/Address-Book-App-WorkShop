@@ -16,7 +16,7 @@ public interface IAddressBookService {
 
 	List<AddressBookModel> getAddressBookData();
 
-	AddressBookModel getAddressBookDataById(int id);
+	AddressBookModel getAddressBookDataById(int addressbookId);
 
-	void deleteAddressBookData(int id);
+	void deleteAddressBookData(int addressbookId);
 }
