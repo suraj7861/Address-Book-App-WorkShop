@@ -25,9 +25,9 @@ public @Data class PersonDTO {
 	@NotBlank(message = "Gender can not be null")
 	public String gender;
 
-	//@Pattern(regexp = "^[0-9]{10}$", message = "phone Number is invalid")
-	//@NotBlank(message = "phone Number can not be null")
-	public long phoneNumber;
+	@Pattern(regexp = "^[1-9]{2}\\s{1}[0-9]{10}$", message = "phone Number is invalid")
+	@NotBlank(message = "phone Number can not be null")
+	public String phoneNumber;
 
 	@Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "email is invalid")
 	@NotBlank(message = "email can not be null")
