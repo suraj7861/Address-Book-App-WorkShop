@@ -25,8 +25,11 @@ public class PersonService implements IPersonService {
 	@Autowired
 	private IAddressBookRepository addressbookrepo;
 
+	@Autowired
+	private IAddressBookService addressBookService;
+
 	/**
-	 * @param PersonDTO
+	 * @param : adddressbookId, PersonDTO
 	 * @return : PersonData
 	 */
 	@Override
@@ -36,6 +39,8 @@ public class PersonService implements IPersonService {
 		Optional<AddressBookModel> addressbook = addressbookrepo.findById(adddressbookId);
 		if (addressbook.isPresent()) {
 			contactData.setAddressBook(addressbook.get());
+		}else {
+			addressBookService.getAddressBookDataById(adddressbookId);
 		}
 		return personRepository.save(contactData);
 	}
@@ -46,11 +51,13 @@ public class PersonService implements IPersonService {
 	 */
 	@Override
 	public PersonData updatePersonDta(int adddressbookId, int personId, PersonDTO personDTO) {
-		PersonData personData = this.getPersonDataById(adddressbookId, personId);
+		PersonData personData = this.getPersonDataById(personId);
 		personData.updatePersonData(personDTO);
 		Optional<AddressBookModel> addressbook = addressbookrepo.findById(adddressbookId);
 		if (addressbook.isPresent()) {
 			personData.setAddressBook(addressbook.get());
+		} else {
+			addressBookService.getAddressBookDataById(adddressbookId);
 		}
 		return personRepository.save(personData);
 	}
@@ -68,7 +75,7 @@ public class PersonService implements IPersonService {
 	 * @return : PersonData
 	 */
 	@Override
-	public PersonData getPersonDataById(int addressbookId, int personId) {
+	public PersonData getPersonDataById(int personId) {
 		return personRepository.findById(personId)
 				.orElseThrow(() -> new PersonException("User with User id " + personId + " does not exist !..."));
 	}
@@ -78,9 +85,13 @@ public class PersonService implements IPersonService {
 	 * @return : void
 	 */
 	@Override
-	public void deletePersonData(int addressbookId, int personId) {
-		PersonData personData = this.getPersonDataById(addressbookId, personId);
+	public void deletePersonData(int personId) {
+		PersonData personData = this.getPersonDataById(personId);
 		personRepository.delete(personData);
 	}
 
+	@Override
+	public List<PersonData> getPersonsDataByAddressBookId(int AddressBookId) {
+		return personRepository.findPersonsByAddressBookId(AddressBookId);
+	}
 }

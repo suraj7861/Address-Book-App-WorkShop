@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +34,7 @@ public class PersonController {
 	 * @param PersonDTO
 	 * @return : PersonData and HttpStatus
 	 */
-	@PostMapping("/Create")
+	@PostMapping("/create")
 	public ResponseEntity<ResponseDTO> createAddressBookData(@RequestParam int adddressbookId,
 			@Valid @RequestBody PersonDTO personDTO) {
 		PersonData contactDetails = null;
@@ -48,7 +49,7 @@ public class PersonController {
 	 * @param : ContactId and PersonDTO
 	 * @return : ResponseDTO
 	 */
-	@PutMapping("/Update")
+	@PutMapping("/update")
 	public ResponseEntity<ResponseDTO> updateAddressBookData(@RequestParam int addressbookId,
 			@RequestParam int personId, @RequestBody PersonDTO personDTO) {
 		PersonData contactDetails = null;
@@ -77,11 +78,11 @@ public class PersonController {
 	 * @return : ResponseDTO
 	 */
 	@GetMapping("/get")
-	public ResponseEntity<ResponseDTO> getAddressBookData(@RequestParam int addressbookId, @RequestParam int personId) {
+	public ResponseEntity<ResponseDTO> getAddressBookData(@RequestParam int personId) {
 		PersonData contactDetails = null;
-		contactDetails = personService.getPersonDataById(addressbookId, personId);
+		contactDetails = personService.getPersonDataById(personId);
 		ResponseDTO respDTO = new ResponseDTO("Get call success for id:" + personId, contactDetails);
-		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
+		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
 	}
 
 	/**
@@ -90,11 +91,23 @@ public class PersonController {
 	 * @param : contactId
 	 * @return : ResponseDTO
 	 */
-	@DeleteMapping("/Delete")
-	public ResponseEntity<ResponseDTO> deleteAddressBookData(@RequestParam int addressbookId,
-			@RequestParam int personId) {
-		personService.deletePersonData(addressbookId, personId);
+	@DeleteMapping("/delete")
+	public ResponseEntity<ResponseDTO> deleteAddressBookData(@RequestParam int personId) {
+		personService.deletePersonData(personId);
 		ResponseDTO respDTO = new ResponseDTO("Deleted AddressBook data Successfully", "deleted id is :" + personId);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
+	}
+	
+	/**
+	 * @param : AddressBookId
+	 * @return : persons datails by AddressBookId and httpStatus
+	 */
+	@GetMapping("/addressBookId/{AddressBookId}")
+	public ResponseEntity<ResponseDTO> getPersonsByAddressBookId(@PathVariable int AddressBookId) {
+
+		List<PersonData> personsList = null;
+		personsList = personService.getPersonsDataByAddressBookId(AddressBookId);
+		ResponseDTO response = new ResponseDTO("Get Call for Address Book Id Successful", personsList);
+		return new ResponseEntity<ResponseDTO>(response, HttpStatus.OK);
 	}
 }

@@ -33,7 +33,7 @@ public class AddressBookController {
 	 * @param AddressBookDTO
 	 * @return : ResponseDTO
 	 */
-	@PostMapping("/Create")
+	@PostMapping("/create")
 	public ResponseEntity<ResponseDTO> createAddressBookData(@Valid @RequestBody AddressBookDTO bookDTO) {
 		AddressBookModel createBook = null;
 		createBook = addressBookService.createAddressBookData(bookDTO);
@@ -46,7 +46,7 @@ public class AddressBookController {
 	 * @param : addressbookId, AddressBookDTO
 	 * @return : ResponseDTO
 	 */
-	@PutMapping("Update")
+	@PutMapping("update")
 	public ResponseEntity<ResponseDTO> updateAddressBookData(@RequestParam int addressbookId,@RequestBody AddressBookDTO bookDTO) {
 		AddressBookModel createBook = null;
 		createBook = addressBookService.updateAddressBookData(addressbookId,bookDTO);
@@ -85,7 +85,7 @@ public class AddressBookController {
 	 * @param : addressbookId
 	 * @return : ResponseDTO
 	 */
-	@DeleteMapping("/Delete")
+	@DeleteMapping("/delete")
 	public ResponseEntity<ResponseDTO> deleteAddressBookData(@RequestParam int addressbookId) {
 		addressBookService.deleteAddressBookData(addressbookId);
 		ResponseDTO respDTO = new ResponseDTO("Deleted AddressBook data Successfully", "deleted addressbookId is :" + addressbookId);

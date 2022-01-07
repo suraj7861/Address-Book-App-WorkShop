@@ -51,16 +51,16 @@ public @Data class PersonData {
 	}
 
 	public void updatePersonData(PersonDTO personDTO) {
-		this.firstName = personDTO.firstName;
-		this.lastName = personDTO.lastName;
-		this.gender = personDTO.gender;
-		this.phoneNumber = personDTO.phoneNumber;
-		this.email = personDTO.email;
-		this.address = personDTO.address;
-		this.city = personDTO.city;
-		this.state = personDTO.state;
-		this.country = personDTO.country;
-		this.profilePic = personDTO.profilePic;
+		this.firstName = personDTO.getFirstName();
+		this.lastName = personDTO.getLastName();
+		this.gender = personDTO.getGender();
+		this.phoneNumber = personDTO.getPhoneNumber();
+		this.email = personDTO.getEmail();
+		this.address = personDTO.getAddress();
+		this.city = personDTO.getCity();
+		this.state = personDTO.getState();
+		this.country = personDTO.getCountry();
+		this.profilePic = personDTO.getProfilePic();
 
 	}
 

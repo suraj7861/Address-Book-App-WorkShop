@@ -11,6 +11,11 @@ import javax.persistence.Id;
 import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
 
 import lombok.Data;
+
+/**
+ * @Entity : specifies class is entity
+ * @Data : Auto Generate getters and setters, constructor, toString
+ */
 @Entity
 public @Data class AddressBookModel {
 
@@ -31,6 +36,6 @@ public @Data class AddressBookModel {
 	}
 
 	public void updateAddressBookData(AddressBookDTO bookDTO) {
-		this.addressBookName = bookDTO.addressBookName;
+		this.addressBookName = bookDTO.getAddressBookName();
 	}
 }
